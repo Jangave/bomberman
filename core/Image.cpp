@@ -25,37 +25,37 @@ const float* Image::getColor() const {
 	return color;
 }
 
-int Image::getHeight() const {
+float Image::getHeight() const {
 	return height;
 }
 
-void Image::setHeight(int height) {
+void Image::setHeight(float height) {
 	this->height = height;
 }
 
-int Image::getWidth() const {
+float Image::getWidth() const {
 	return width;
 }
 
-void Image::setWidth(int width) {
+void Image::setWidth(float width) {
 	this->width = width;
 }
 
-Image::Image(int w, int h) {
+Image::Image(float w, float h) {
 	width = w;
 	height = h;
 	for(int i = 0; i < 3; ++i)
 		color[i] = 255;
 }
 
-Image::Image(int w, int h, float* c) {
+Image::Image(float w, float h, float* c) {
 	width = w;
 	height = h;
 	for(int i = 0; i < 3; ++i)
 		color[i] = c[i];
 }
 
-Image::Image(int w, int h, float r, float g, float b) {
+Image::Image(float w, float h, float r, float g, float b) {
 	width = w;
 	height = h;
 	color[0] = r;

@@ -10,7 +10,7 @@
 
 #include <vector>
 
-#include "Object.h"
+#include "../entity/headers/Object.h"
 
 #include "Map.h"
 #include "Window.h"
@@ -22,17 +22,21 @@ public:
 	Ambient(Map* m, Window* w);
 	virtual ~Ambient();
 
-	void addObject(Object& o);
+	void addObject(Object* o);
+	void removeObject(Object* o);
 
-	const std::vector<Object>& getObject() const;
-	void setObject(const std::vector<Object>& objects);
+	const std::vector<Object*>& getObject() const;
+	void setObject(const std::vector<Object*>& objects);
 
 	void draw();
 	void update();
 
+	Object* getObject(Position& p);
+	Object* getObject(int x, int y);
+
 	Window* window;
 private:
-	std::vector<Object> objects;
+	std::vector<Object*> objects;
 	Map* map;
 
 };

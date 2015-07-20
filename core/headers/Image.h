@@ -13,25 +13,25 @@
 class Image {
 public:
 	Image();
-	Image(int w, int h);
-	Image(int w, int h, float* c);
-	Image(int w, int h, float r, float g, float b);
+	Image(float w, float h);
+	Image(float w, float h, float* c);
+	Image(float w, float h, float r, float g, float b);
 	virtual ~Image();
 
 	void draw();
 	void draw(const Position& p);
 
-	int getHeight() const;
-	void setHeight(int height);
-	int getWidth() const;
-	void setWidth(int width);
+	float getHeight() const;
+	void setHeight(float height);
+	float getWidth() const;
+	void setWidth(float width);
 	const float* getColor() const;
 	const float getColor(int i) const;
 	void setColor(float r, float g, float b);
 
 private:
-	int width;
-	int height;
+	float width;
+	float height;
 
 	float color[3];
 

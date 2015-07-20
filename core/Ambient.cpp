@@ -7,8 +7,9 @@
 #include "headers/Ambient.h"
 
 #include <GL/gl.h>
+#include <iterator>
 
-#include "headers/Image.h"
+#include "entity/headers/Object.h"
 #include "headers/Position.h"
 
 class Window;
@@ -27,37 +28,38 @@ Ambient::~Ambient() {
 	// TODO Auto-generated destructor stub
 }
 
-const std::vector<Object>& Ambient::getObject() const {
+const std::vector<Object*>& Ambient::getObject() const {
 	return objects;
 }
 
-void Ambient::addObject(Object& o) {
+void Ambient::addObject(Object* o) {
 	objects.push_back(o);
 }
 
-void Ambient::setObject(const std::vector<Object>& object) {
+void Ambient::setObject(const std::vector<Object*>& object) {
 	this->objects = objects;
 }
 
 void Ambient::draw() {
 	int dims[4];
 	glGetIntegerv(GL_VIEWPORT, dims);
-	int w = dims[2]/map->getSizeViewX();//objects[i].getImage().getWidth();
-	int h = dims[3]/map->getSizeViewY();//objects[i].getImage().getHeight();
+
+	float w = (dims[2]/map->getSizeViewX());
+	float h = (dims[3]/map->getSizeViewY());
 
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		int x = objects[i].getPosition().getX();
-		int y = objects[i].getPosition().getY();
+		float x = objects[i]->getPosition().getX();
+		float y = objects[i]->getPosition().getY();
 
-		glColor3f(objects[i].getImage().getColor(0),
-				objects[i].getImage().getColor(1),
-				objects[i].getImage().getColor(2));
+		glColor3f(objects[i]->getImage().getColor(0),
+				objects[i]->getImage().getColor(1),
+				objects[i]->getImage().getColor(2));
 
 		glBegin(GL_POLYGON);
 			glVertex2i(x*w,y*h);
-			glVertex2i(x*w+w,y*h);
-			glVertex2i(x*w+w,y*h+h);
-			glVertex2i(x*w,y*h+h);
+			glVertex2i(x*w+w*objects[i]->getImage().getWidth(),y*h);
+			glVertex2i(x*w+w*objects[i]->getImage().getWidth(),y*h+h*objects[i]->getImage().getHeight());
+			glVertex2i(x*w,y*h+h*objects[i]->getImage().getHeight());
 		glEnd();
 	}
 }
@@ -65,6 +67,35 @@ void Ambient::draw() {
 void Ambient::update() {
 	draw();
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		objects[i].update();
+		objects[i]->update();
 	}
 }
+
+Object* Ambient::getObject(Position& p) {
+	for(unsigned int i = 0; i < objects.size(); ++i){
+		const Position& pt = objects[i]->getPosition();
+		if(pt.getX() == p.getX() && pt.getY() == p.getY())
+			return objects[i];
+	}
+	return 0;
+}
+
+Object* Ambient::getObject(int x, int y) {
+	for(unsigned int i = 0; i < objects.size(); ++i){
+		const Position& pt = objects[i]->getPosition();
+		if((int)pt.getX() == (int)x && (int)pt.getY() == (int)y)
+			return objects[i];
+	}
+		return 0;
+}
+
+void Ambient::removeObject(Object* o) {
+	for ( std::vector<Object*>::iterator it = objects.begin(); it != objects.end(); ++it){
+	   if( (*it) == o ){
+	      delete * it;
+	      objects.erase(it);
+	      break;
+	   }
+	}
+}
+

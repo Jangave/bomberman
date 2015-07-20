@@ -8,8 +8,6 @@
 #include "headers/Object.h"
 
 
-
-
 Object::Object(Position p, Image i) {
 	position = p;
 	image = i;
@@ -41,30 +39,8 @@ void Object::setPosition(Position& position) {
 	this->position = position;
 }
 
-void Object::setPosition(int x, int y) {
+void Object::setPosition(float x, float y) {
 	position.set(x, y);
-}
-//double lastMove;
-void Object::update() {
-	//image.draw(position);
-	/*if(glfwGetTime() - lastMove > 0.25){
-		if(glfwGetKey(ambient->window->getNativeWindow(), GLFW_KEY_W) == 1){
-			position.move(0, 1);
-			lastMove = glfwGetTime();
-		}
-		if(glfwGetKey(ambient->window->getNativeWindow(), GLFW_KEY_S) == 1){
-			position.move(0, -1);
-			lastMove = glfwGetTime();
-		}
-		if(glfwGetKey(ambient->window->getNativeWindow(), GLFW_KEY_D) == 1){
-			position.move(1, 0);
-			lastMove = glfwGetTime();
-		}
-		if(glfwGetKey(ambient->window->getNativeWindow(), GLFW_KEY_A) == 1){
-			position.move(-1, 0);
-			lastMove = glfwGetTime();
-		}
-	}*/
 }
 
 const Ambient* Object::getAmbient() const {

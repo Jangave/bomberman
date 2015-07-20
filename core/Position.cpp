@@ -11,33 +11,33 @@ Position::~Position() {
 
 }
 
-int Position::getX() const {
+float Position::getX() const {
 	return x;
 }
 
-void Position::setX(int x) {
+void Position::setX(float x) {
 	this->x = x;
 }
 
-int Position::getY() const {
+float Position::getY() const {
 	return y;
 }
 
-void Position::setY(int y) {
+void Position::setY(float y) {
 	this->y = y;
 }
 
-Position::Position(int xp, int yp) {
+Position::Position(float xp, float yp) {
 	x = xp;
 	y = yp;
 }
 
-void Position::move(int xp, int yp) {
+void Position::move(float xp, float yp) {
 	x += xp;
 	y += yp;
 }
 
-void Position::set(int xp, int yp) {
+void Position::set(float xp, float yp) {
 	x = xp;
 	y = yp;
 }

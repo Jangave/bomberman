@@ -4,32 +4,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../core/Ambient.cpp \
-../core/Drawer.cpp \
-../core/Image.cpp \
-../core/Map.cpp \
-../core/Position.cpp \
-../core/Window.cpp 
+../core/entity/Imob.cpp \
+../core/entity/Mob.cpp \
+../core/entity/Object.cpp 
 
 OBJS += \
-./core/Ambient.o \
-./core/Drawer.o \
-./core/Image.o \
-./core/Map.o \
-./core/Position.o \
-./core/Window.o 
+./core/entity/Imob.o \
+./core/entity/Mob.o \
+./core/entity/Object.o 
 
 CPP_DEPS += \
-./core/Ambient.d \
-./core/Drawer.d \
-./core/Image.d \
-./core/Map.d \
-./core/Position.d \
-./core/Window.d 
+./core/entity/Imob.d \
+./core/entity/Mob.d \
+./core/entity/Object.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-core/%.o: ../core/%.cpp
+core/entity/%.o: ../core/entity/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
 	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

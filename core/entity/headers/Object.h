@@ -8,8 +8,8 @@
 #ifndef OBJECT_H_
 #define OBJECT_H_
 
-#include "Image.h"
-#include "Position.h"
+#include "../../headers/Image.h"
+#include "../../headers/Position.h"
 
 class Ambient;
 
@@ -23,13 +23,14 @@ public:
 	void setImage(Image image);
 	const Position& getPosition() const;
 	void setPosition(Position& position);
-	void setPosition(int x, int y);
+	void setPosition(float x, float y);
 	const Ambient* getAmbient() const;
 	void setAmbient(Ambient* ambient);
 
-	void update();
+	virtual void update() = 0;
+	//virtual void met() = 0;
 
-private:
+protected:
 	Image image;
 	Position position;
 

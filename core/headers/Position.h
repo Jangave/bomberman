@@ -11,20 +11,20 @@
 class Position {
 public:
 	Position();
-	Position(int xp, int yp);
+	Position(float xp, float yp);
 	virtual ~Position();
 
-	void move(int xp, int yp);
-	void set(int xp, int yp);
+	void move(float xp, float yp);
+	void set(float xp, float yp);
 
-	int getX() const;
-	void setX(int x);
-	int getY() const;
-	void setY(int y);
+	float getX() const;
+	void setX(float x);
+	float getY() const;
+	void setY(float y);
 
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 
 };
 
