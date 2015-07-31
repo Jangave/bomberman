@@ -22,7 +22,7 @@ public:
 	float getY() const;
 	void setY(float y);
 
-private:
+protected:
 	float x;
 	float y;
 

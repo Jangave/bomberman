@@ -10,11 +10,12 @@
 
 #include <vector>
 
-#include "../entity/headers/Object.h"
+#include "../objects/headers/Entity.h"
+#include "../objects/headers/Object.h"
+#include "../objects/headers/Particle.h"
 
 #include "Map.h"
 #include "Window.h"
-
 
 class Ambient {
 public:
@@ -22,21 +23,21 @@ public:
 	Ambient(Map* m, Window* w);
 	virtual ~Ambient();
 
-	void addObject(Object* o);
-	void removeObject(Object* o);
+	//void addObject(Object* o);
+	//void removeObject(Object* o);
 
-	const std::vector<Object*>& getObject() const;
-	void setObject(const std::vector<Object*>& objects);
+	//const std::vector<Object*>& getObject() const;
+	//void setObject(const std::vector<Object*>& objects);
 
-	void draw();
-	void update();
+	void tick();
 
-	Object* getObject(Position& p);
-	Object* getObject(int x, int y);
+	void draw(Drawable* d);
 
 	Window* window;
-private:
+protected:
+	std::vector<Entity*> entitys;
 	std::vector<Object*> objects;
+	std::vector<Particle*> particles;
 	Map* map;
 
 };

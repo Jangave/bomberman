@@ -13,14 +13,14 @@
 #include "core/headers/Image.h"
 #include "core/headers/Position.h"
 
-Fire::Fire(bool isLast, bool isX, Position p, Ambient* a) : Object(p, Image(1, 1, 1, 1, 0), a) {
+Fire::Fire(bool isLast, bool isX, Position* p, Ambient* a) : Object(p, new Image(1, 1, 1, 1, 0), a) {
 	createTime = glfwGetTime();
 	if(isX){
-		position.move(0, 0.25);
-		image.setHeight(0.5);
+		position->move(0, 0.25);
+		image->setHeight(0.5);
 	} else {
-		position.move(0.25, 0);
-		image.setWidth(0.5);
+		position->move(0.25, 0);
+		image->setWidth(0.5);
 	}
 }
 

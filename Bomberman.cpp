@@ -31,22 +31,22 @@ int Bomberman::run() {
 	Map* map = new Map(19, 13);
 	Ambient* ambient = new Ambient(map, window);
 
-	Character* c = new Character(Position(3, 3), Image(1, 1, 1.f, 1.f, 1.f), ambient);
+	Character* c = new Character(new Position(3, 3), new Image(1, 1, 1.f, 1.f, 1.f), ambient);
 	ambient->addObject(c);
 
 	//ambient->addObject(new Rock(Position(8,4), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
 	for(int i = 0; i < map->getSizeY(); ++i){
-		ambient->addObject(new Rock(Position(0, i), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
-		ambient->addObject(new Rock(Position(map->getSizeX()-1, i), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
+		ambient->addObject(new Rock(new Position(0, i), new Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
+		ambient->addObject(new Rock(new Position(map->getSizeX()-1, i), new Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
 	}
 	for(int i = 1; i < map->getSizeX()-1; ++i){
-		ambient->addObject(new Rock(Position(i, 0), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
-		ambient->addObject(new Rock(Position(i, map->getSizeY()-1), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
+		ambient->addObject(new Rock(new Position(i, 0), new Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
+		ambient->addObject(new Rock(new Position(i, map->getSizeY()-1), new Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
 	}
 
 	for(int i = 2; i < map->getSizeX()-2; i+=2){
 		for(int j = 2; j < map->getSizeX()-3; j+=2){
-			ambient->addObject(new Rock(Position(i, j), Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
+			ambient->addObject(new Rock(new Position(i, j), new Image(1, 1, 0.5f, 0.5f, 0.5f), ambient));
 		}
 	}
 

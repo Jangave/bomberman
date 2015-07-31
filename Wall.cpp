@@ -7,7 +7,7 @@
 
 #include "headers/Wall.h"
 
-Wall::Wall() : Object(Position(), Image()) {
+Wall::Wall() : Object(new Position(), new Image()) {
 	// TODO Auto-generated constructor stub
 
 }

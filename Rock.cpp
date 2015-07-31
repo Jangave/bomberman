@@ -10,7 +10,7 @@
 #include "core/headers/Image.h"
 #include "core/headers/Position.h"
 
-Rock::Rock(Position p, Image i, Ambient* a) : Object(p, i, a){
+Rock::Rock(Position* p, Image* i, Ambient* a) : Object(p, i, a){
 	position = p;
 	image = i;
 	ambient = a;

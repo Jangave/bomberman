@@ -1,18 +1,18 @@
 /*
- * Mob.cpp
+e a * Tes.cpp
  *
- *  Created on: 20/07/2015
+ *  Created on: 31 de jul de 2015
  *      Author: juan
  */
 
-#include "headers/Mob.h"
+#include "Tes.h"
 
-Mob::Mob() : Object(Position(), Image()) {
+Tes::Tes() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Mob::~Mob() {
+Tes::~Tes() {
 	// TODO Auto-generated destructor stub
 }
 

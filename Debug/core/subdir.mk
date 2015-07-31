@@ -8,7 +8,9 @@ CPP_SRCS += \
 ../core/Drawer.cpp \
 ../core/Image.cpp \
 ../core/Map.cpp \
+../core/Node.cpp \
 ../core/Position.cpp \
+../core/Shape.cpp \
 ../core/Window.cpp 
 
 OBJS += \
@@ -16,7 +18,9 @@ OBJS += \
 ./core/Drawer.o \
 ./core/Image.o \
 ./core/Map.o \
+./core/Node.o \
 ./core/Position.o \
+./core/Shape.o \
 ./core/Window.o 
 
 CPP_DEPS += \
@@ -24,7 +28,9 @@ CPP_DEPS += \
 ./core/Drawer.d \
 ./core/Image.d \
 ./core/Map.d \
+./core/Node.d \
 ./core/Position.d \
+./core/Shape.d \
 ./core/Window.d 
 
 

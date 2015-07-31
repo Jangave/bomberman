@@ -25,5 +25,8 @@ C_DEPS :=
 SUBDIRS := \
 . \
 core \
-core/entity \
+core/headers \
+core/objects \
+core/objects/types \
+headers \
 

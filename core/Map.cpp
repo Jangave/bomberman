@@ -90,3 +90,8 @@ void Map::moveView(int x, int y) {
 void Map::setViewY(int viewY) {
 	this->viewY = viewY;
 }
+
+bool Map::isInView(Drawable* d) {
+	return ( (d->getPosition()->getX() + d->getImage()->getWidth()  > viewX) && (d->getPosition()->getX() < viewX + sizeViewX) ) &&
+		   ( (d->getPosition()->getY() + d->getImage()->getHeight() > viewY) && (d->getPosition()->getY() < viewY + sizeViewY) );
+}

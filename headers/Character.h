@@ -16,7 +16,7 @@ class Character: public Object {
 public:
 	//Character();
 	//Character(Position p, Image i);
-	Character(Position p, Image i, Ambient* a);
+	Character(Position* p, Image* i, Ambient* a);
 	virtual ~Character();
 
 	void update();

@@ -9,10 +9,38 @@
 #include <GL/gl.h>
 #include <iterator>
 
-#include "entity/headers/Object.h"
-#include "headers/Position.h"
+void Ambient::tick(){
 
-class Window;
+	for (unsigned int i = 0; i < entitys.size(); ++i) {
+		for (unsigned int j = i; j < entitys.size(); ++j) {
+			if(entitys[i]->isColliding(entitys[j])){
+				entitys[i]->onCollide(entitys[j]);
+				entitys[j]->onCollide(entitys[i]);
+			}
+		}
+		for (unsigned int j = 0; j < objects.size(); ++j) {
+			if(entitys[i]->isColliding(objects[j])){
+				entitys[i]->onCollide(objects[j]);
+				objects[j]->onCollide(entitys[i]);
+			}
+		}
+		entitys[i]->update();
+		entitys[i]->draw();
+	}
+	for (unsigned int i = 0; i < objects.size(); ++i){
+			objects[i]->draw();
+	}
+	for (unsigned int i = 0; i < particles.size(); ++i) {
+		particles[i]->update();
+		particles[i]->draw();
+	}
+
+}
+
+void Ambient::draw(Drawable* d){
+	if(map->isInView(d))
+		d->draw();
+}
 
 Ambient::Ambient() {
 	map = 0;
@@ -28,17 +56,10 @@ Ambient::~Ambient() {
 	// TODO Auto-generated destructor stub
 }
 
-const std::vector<Object*>& Ambient::getObject() const {
-	return objects;
-}
-
-void Ambient::addObject(Object* o) {
+/*void Ambient::addObject(Object* o) {
 	objects.push_back(o);
 }
 
-void Ambient::setObject(const std::vector<Object*>& object) {
-	this->objects = objects;
-}
 
 void Ambient::draw() {
 	int dims[4];
@@ -48,33 +69,33 @@ void Ambient::draw() {
 	float h = (dims[3]/map->getSizeViewY());
 
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		float x = objects[i]->getPosition().getX();
-		float y = objects[i]->getPosition().getY();
+		float x = objects[i]->getPosition()->getX();
+		float y = objects[i]->getPosition()->getY();
 
-		glColor3f(objects[i]->getImage().getColor(0),
-				objects[i]->getImage().getColor(1),
-				objects[i]->getImage().getColor(2));
+		glColor3f(objects[i]->getImage()->getColor(0),
+				objects[i]->getImage()->getColor(1),
+				objects[i]->getImage()->getColor(2));
 
 		glBegin(GL_POLYGON);
 			glVertex2i(x*w,y*h);
-			glVertex2i(x*w+w*objects[i]->getImage().getWidth(),y*h);
-			glVertex2i(x*w+w*objects[i]->getImage().getWidth(),y*h+h*objects[i]->getImage().getHeight());
-			glVertex2i(x*w,y*h+h*objects[i]->getImage().getHeight());
+			glVertex2i(x*w+w*objects[i]->getImage()->getWidth(),y*h);
+			glVertex2i(x*w+w*objects[i]->getImage()->getWidth(),y*h+h*objects[i]->getImage()->getHeight());
+			glVertex2i(x*w,y*h+h*objects[i]->getImage()->getHeight());
 		glEnd();
 	}
-}
+}*/
 
-void Ambient::update() {
+/*void Ambient::update() {
 	draw();
 	for(unsigned int i = 0; i < objects.size(); ++i){
 		objects[i]->update();
 	}
-}
+}*/
 
-Object* Ambient::getObject(Position& p) {
+/*Object* Ambient::getObject(Position* p) {
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		const Position& pt = objects[i]->getPosition();
-		if(pt.getX() == p.getX() && pt.getY() == p.getY())
+		Position* pt = objects[i]->getPosition();
+		if(pt->getX() == p->getX() && pt->getY() == p->getY())
 			return objects[i];
 	}
 	return 0;
@@ -82,8 +103,8 @@ Object* Ambient::getObject(Position& p) {
 
 Object* Ambient::getObject(int x, int y) {
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		const Position& pt = objects[i]->getPosition();
-		if((int)pt.getX() == (int)x && (int)pt.getY() == (int)y)
+		Position* pt = objects[i]->getPosition();
+		if((int)pt->getX() == (int)x && (int)pt->getY() == (int)y)
 			return objects[i];
 	}
 		return 0;
@@ -97,5 +118,5 @@ void Ambient::removeObject(Object* o) {
 	      break;
 	   }
 	}
-}
+}*/
 

@@ -12,7 +12,7 @@
 
 class Rock: public Object {
 public:
-	Rock(Position p, Image i, Ambient* a);
+	Rock(Position* p, Image* i, Ambient* a);
 	virtual ~Rock();
 
 	void update();

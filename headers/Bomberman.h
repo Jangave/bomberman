@@ -14,7 +14,7 @@ public:
 	virtual ~Bomberman();
 
 	int run();
-private:
+protected:
 	//Window window;
 };
 

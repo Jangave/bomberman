@@ -29,7 +29,8 @@ public:
 	const float getColor(int i) const;
 	void setColor(float r, float g, float b);
 
-private:
+
+protected:
 	float width;
 	float height;
 

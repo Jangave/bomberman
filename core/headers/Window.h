@@ -32,7 +32,7 @@ public:
 	GLFWwindow*& getNativeWindow();
 	void setNativeWindow(GLFWwindow*& nativeWindow);
 
-private:
+protected:
    GLFWwindow* nativeWindow;
    
    Drawer drawer;

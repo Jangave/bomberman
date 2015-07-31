@@ -14,7 +14,7 @@
 #include "core/headers/Position.h"
 #include "headers/Fire.h"
 
-Bomb::Bomb(int power, Position p, Ambient* a) : Object(p, Image(0.5, 0.5, 0, 1, 1), a){
+Bomb::Bomb(int power, Position* p, Ambient* a) : Object(p, new Image(0.5, 0.5, 0, 1, 1), a){
 	createTime = glfwGetTime();
 	this->power = power;
 }
@@ -26,27 +26,27 @@ Bomb::~Bomb() {
 void Bomb::update() {
 	int d = glfwGetTime() - createTime;
 	if(d > 2){
-		float x = position.getX()-0.25;
-		float y = position.getY()-0.25;
+		float x = position->getX()-0.25;
+		float y = position->getY()-0.25;
 
 		for(int i = 1; i <= power; ++i)
 			if(ambient->getObject(x+i, y) == 0)
-				ambient->addObject(new Fire(0, 1, Position(x+i, y), ambient));
+				ambient->addObject(new Fire(0, 1, new Position(x+i, y), ambient));
 			else
 				break;
 		for(int i = 1; i <= power; ++i)
 			if(ambient->getObject(x-i, y) == 0)
-				ambient->addObject(new Fire(0, 1, Position(x-i, y), ambient));
+				ambient->addObject(new Fire(0, 1, new Position(x-i, y), ambient));
 			else
 				break;
 		for(int i = 1; i <= power; ++i)
 			if(ambient->getObject(x, y+i) == 0)
-				ambient->addObject(new Fire(0, 0, Position(x, y+i), ambient));
+				ambient->addObject(new Fire(0, 0, new Position(x, y+i), ambient));
 			else
 				break;
 		for(int i = 1; i <= power; ++i)
 			if(ambient->getObject(x, y-i) == 0)
-				ambient->addObject(new Fire(0, 0, Position(x, y-i), ambient));
+				ambient->addObject(new Fire(0, 0, new Position(x, y-i), ambient));
 			else
 				break;
 

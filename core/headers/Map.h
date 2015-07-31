@@ -8,16 +8,17 @@
 #ifndef MAP_H_
 #define MAP_H_
 
+#include "../objects/types/headers/Drawable.h"
+
 class Map {
 public:
-	Map();
 	Map(int sizeX, int sizeY);
 	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY);
 	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY, int viewX, int viewY);
 	virtual ~Map();
 
 	void moveView(int x, int y);
-	
+
 	int getSizeViewX() const;
 	void setSizeViewX(int sizeViewX);
 	int getSizeViewY() const;
@@ -31,7 +32,9 @@ public:
 	int getViewY() const;
 	void setViewY(int viewY);
 
-private:
+	bool isInView(Drawable* d);
+
+protected:
 	int sizeX, sizeY;
 	int sizeViewX, sizeViewY;
 	int viewX, viewY;
