@@ -6,8 +6,6 @@
 
 #include "headers/Ambient.h"
 
-#include <GL/gl.h>
-#include <iterator>
 
 void Ambient::tick(){
 
@@ -37,23 +35,49 @@ void Ambient::tick(){
 
 }
 
+void Ambient::addObject(Object* obj) {
+	objects.push_back(obj);
+}
+
+void Ambient::addEntity(Entity* ent) {
+	entitys.push_back(ent);
+}
+
+void Ambient::addParticle(Particle* par) {
+	particles.push_back(par);
+}
+
 void Ambient::draw(Drawable* d){
 	if(map->isInView(d))
 		d->draw();
 }
 
 Ambient::Ambient() {
+	objects = std::vector<Object*>();
+	entitys = std::vector<Entity*>();
+	particles = std::vector<Particle*>();
 	map = 0;
-	window = 0;
 }
 
-Ambient::Ambient(Map* m, Window* w) {
+Ambient::Ambient(Map* m) {
+	objects = std::vector<Object*>();
+	entitys = std::vector<Entity*>();
+	particles = std::vector<Particle*>();
 	map = m;
-	window = w;
 }
 
 Ambient::~Ambient() {
-	// TODO Auto-generated destructor stub
+
+	for (unsigned int i = 0; i < entitys.size(); ++i) {
+		delete entitys[i];
+	}
+	for (unsigned int i = 0; i < objects.size(); ++i) {
+		delete objects[i];
+	}
+	for (unsigned int i = 0; i < particles.size(); ++i) {
+		delete particles[i];
+	}
+	delete map;
 }
 
 /*void Ambient::addObject(Object* o) {

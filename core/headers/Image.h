@@ -19,7 +19,7 @@ public:
 	virtual ~Image();
 
 	void draw();
-	void draw(const Position& p);
+	void draw(Position* p);
 
 	float getHeight() const;
 	void setHeight(float height);

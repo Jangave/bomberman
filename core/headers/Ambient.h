@@ -15,12 +15,11 @@
 #include "../objects/headers/Particle.h"
 
 #include "Map.h"
-#include "Window.h"
 
 class Ambient {
 public:
 	Ambient();
-	Ambient(Map* m, Window* w);
+	Ambient(Map* m);
 	virtual ~Ambient();
 
 	//void addObject(Object* o);
@@ -29,11 +28,14 @@ public:
 	//const std::vector<Object*>& getObject() const;
 	//void setObject(const std::vector<Object*>& objects);
 
+	void addObject(Object* obj);
+	void addEntity(Entity* ent);
+	void addParticle(Particle* par);
+
 	void tick();
 
 	void draw(Drawable* d);
 
-	Window* window;
 protected:
 	std::vector<Entity*> entitys;
 	std::vector<Object*> objects;

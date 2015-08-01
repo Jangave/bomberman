@@ -4,28 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Bomb.cpp \
-../Bomberman.cpp \
-../Character.cpp \
-../Fire.cpp \
-../Rock.cpp \
-../Wall.cpp 
+../main.cpp 
 
 OBJS += \
-./Bomb.o \
-./Bomberman.o \
-./Character.o \
-./Fire.o \
-./Rock.o \
-./Wall.o 
+./main.o 
 
 CPP_DEPS += \
-./Bomb.d \
-./Bomberman.d \
-./Character.d \
-./Fire.d \
-./Rock.d \
-./Wall.d 
+./main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -17,9 +17,7 @@ public:
 	Drawable(Image* image, Position* p);
 	~Drawable();
 
-	void draw(){
-		image->draw();
-	}
+	void draw();
 
 	Image*& getImage();
 	void setImage(Image*& image);

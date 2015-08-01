@@ -7,6 +7,8 @@
 
 #include "headers/Drawable.h"
 
+#include "../../headers/Position.h"
+
 Image*& Drawable::getImage() {
 	return image;
 }
@@ -25,4 +27,8 @@ Drawable::Drawable(Image* image) : Node(){
 
 Drawable::Drawable(Image* image, Position* p) : Node(p){
 	this->image = image;
+}
+
+void Drawable::draw() {
+	image->draw(position);
 }

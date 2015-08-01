@@ -8,7 +8,6 @@
 #include "headers/Image.h"
 
 #include <GL/gl.h>
-#include <iostream>
 
 Image::Image() {
 	width = 0;
@@ -66,9 +65,9 @@ Image::Image(float w, float h, float r, float g, float b) {
 void Image::draw() {
 }
 
-void Image::draw(const Position& p) {
+void Image::draw(Position* p) {
 	glPushMatrix();
-		glTranslatef(p.getX(), p.getY(), 0);
+		glTranslatef(p->getX(), p->getY(), 0);
 		glColor3f(color[0], color[1], color[2]);
 		glBegin(GL_POLYGON);
 			glVertex2i(0, 0);
@@ -77,7 +76,6 @@ void Image::draw(const Position& p) {
 			glVertex2i(0, height);
 		glEnd();
 	glPopMatrix();
-	std::cout << "draw" << std::endl;
 }
 
 const float Image::getColor(int i) const {

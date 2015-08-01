@@ -19,8 +19,8 @@ public:
 
 	void update();
 
-	Ambient*& getAmbient();
-	void setAmbient(Ambient*& ambient);
+	Ambient* getAmbient();
+	void setAmbient(Ambient* ambient);
 
 protected:
 	Ambient* ambient;

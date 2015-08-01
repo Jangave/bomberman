@@ -8,11 +8,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include headers/subdir.mk
 -include core/objects/types/subdir.mk
 -include core/objects/subdir.mk
--include core/headers/subdir.mk
 -include core/subdir.mk
+-include bombermanmnnnmn/subdir.mk
 -include subdir.mk
 -include objects.mk
 

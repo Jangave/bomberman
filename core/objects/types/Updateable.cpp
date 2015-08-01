@@ -14,7 +14,7 @@ Updateable::Updateable(Ambient* ambient) : Node(){
 void Updateable::update() {
 }
 
-Ambient*& Updateable::getAmbient() {
+Ambient* Updateable::getAmbient() {
 	return ambient;
 }
 
@@ -22,6 +22,6 @@ Updateable::Updateable(Ambient* ambient, Position* p) : Node(p){
 	this->ambient = ambient;
 }
 
-void Updateable::setAmbient(Ambient*& ambient) {
+void Updateable::setAmbient(Ambient* ambient) {
 	this->ambient = ambient;
 }

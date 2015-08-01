@@ -38,8 +38,6 @@ bool Window::isClosing() {
 
 void Window::update() {
 
-    draw();
-
     glfwSwapBuffers(nativeWindow);
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
@@ -52,6 +50,7 @@ Window::~Window() {
 }
 
 Window::Window(int w, int h) {
+	glfwInit();
     this->largura = w;
     this->altura = h;
     this->nativeWindow = glfwCreateWindow(w,h, "Bomberman",NULL /* Monitor */, NULL /* (?) Share */);
