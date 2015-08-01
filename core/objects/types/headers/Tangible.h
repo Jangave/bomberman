@@ -11,7 +11,7 @@
 
 #include "../../../headers/Node.h"
 
-class Shape;
+#include "../../../headers/Shape.h"
 
 class Tangible : virtual public Node{
 public:
@@ -21,8 +21,15 @@ public:
 	~Tangible();
 
 	bool isColliding(Tangible* other);
+	virtual void onCollide(Tangible* other);
+	Shape intersectionSize(Tangible* other);
+	int intersectionSizeX(Tangible* other);
+	int intersectionSizeY(Tangible* other);
 
-	void onCollide(Tangible* other);
+	int dX();//deformedX
+	int dY();//deformedY
+	int dX2();//X + deformed sizeX
+	int dY2();//Y + deformed sizeY
 
 	Shape*& getShape();
 	void setShape(Shape*& shape);

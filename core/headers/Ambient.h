@@ -15,11 +15,12 @@
 #include "../objects/headers/Particle.h"
 
 #include "Map.h"
+#include "Window.h"
 
 class Ambient {
 public:
 	Ambient();
-	Ambient(Map* m);
+	Ambient(Map* m, Window* w);
 	virtual ~Ambient();
 
 	//void addObject(Object* o);
@@ -35,6 +36,18 @@ public:
 	void tick();
 
 	void draw(Drawable* d);
+	const std::vector<Entity*>& getEntitys() const;
+	void setEntitys(const std::vector<Entity*>& entitys);
+	Map* getMap();
+	void setMap(Map* map);
+	const std::vector<Object*>& getObjects() const;
+	void setObjects(const std::vector<Object*>& objects);
+	const std::vector<Particle*>& getParticles() const;
+	void setParticles(const std::vector<Particle*>& particles);
+	Window* getWindow();
+	void setWindow(Window* window);
+
+	int getKey(int key);
 
 protected:
 	std::vector<Entity*> entitys;
@@ -42,6 +55,7 @@ protected:
 	std::vector<Particle*> particles;
 	Map* map;
 
+	Window* window;
 };
 
 #endif /* AMBIENT_H_ */

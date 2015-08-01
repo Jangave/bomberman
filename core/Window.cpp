@@ -16,13 +16,13 @@ using namespace std;
 void Window::setup() {
     takeFocus();
 
-    glfwGetFramebufferSize(nativeWindow, &largura, &altura);
+    glfwGetFramebufferSize(nativeWindow, &sizePxX, &sizePxY);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, largura, 0, altura, -1, 1);
+    glOrtho(0, sizePxX, 0, sizePxY, -1, 1);
     glMatrixMode(GL_MODELVIEW);
-    glViewport(0, 0, largura, altura);
+    glViewport(0, 0, sizePxX, sizePxY);
 
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
@@ -49,11 +49,12 @@ Window::~Window() {
     glfwDestroyWindow(nativeWindow);
 }
 
-Window::Window(int w, int h) {
+Window::Window(Map* map) {
 	glfwInit();
-    this->largura = w;
-    this->altura = h;
-    this->nativeWindow = glfwCreateWindow(w,h, "Bomberman",NULL /* Monitor */, NULL /* (?) Share */);
+	this->map = map;
+	sizePxX = map->getSizePxX();
+	sizePxY = map->getSizePxY();
+    this->nativeWindow = glfwCreateWindow(map->getSizePxX(),map->getSizePxY(), "Bomberman",NULL /* Monitor */, NULL /* (?) Share */);
 
     if (this->nativeWindow == NULL)
     {
@@ -69,4 +70,12 @@ void Window::draw(){
 
 GLFWwindow*& Window::getNativeWindow() {
 	return nativeWindow;
+}
+
+Map* Window::getMap() {
+	return map;
+}
+
+void Window::setMap(Map* map) {
+	this->map = map;
 }

@@ -11,12 +11,13 @@
 #include "Drawer.h"
 
 #include <GLFW/glfw3.h>
+#include "Map.h"
 
 class Window {
 public:
 	Window();
-    Window(int w, int h);
-    void setup();
+    Window(Map* map);
+	void setup();
     void takeFocus();
     bool isClosing();
     void update();
@@ -31,14 +32,17 @@ public:
 	void setLargura(int largura);
 	GLFWwindow*& getNativeWindow();
 	void setNativeWindow(GLFWwindow*& nativeWindow);
+	Map* getMap();
+	void setMap(Map* map);
 
 protected:
    GLFWwindow* nativeWindow;
    
    Drawer drawer;
-   
-   int largura;
-   int altura;
+
+   Map* map;
+
+   int sizePxX, sizePxY;
 };
 
 #endif /* WINDOW_H_ */

@@ -21,8 +21,14 @@ public:
 	void setSizeX(int sizeX);
 	int getSizeY() const;
 	void setSizeY(int sizeY);
-	int getSizeDeformedX();
-	int getSizeDeformedY();
+	int getDeformedSizeX();
+	int getDeformedSizeY();
+
+	void addDeformX(int x);
+	void addDeformY(int y);
+
+	int getNegativeDeformX();
+	int getNegativeDeformY();
 
 protected:
 	//std::vector<Position> vertices;

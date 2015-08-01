@@ -49,10 +49,38 @@ void Shape::setSizeY(int sizeY) {
 	this->sizeY = sizeY;
 }
 
-int Shape::getSizeDeformedX() {
-	return sizeX + deformX;
+int Shape::getDeformedSizeX() {
+	if(deformX > 0)
+		return sizeX + deformX;
+	else
+		return sizeX;
 }
 
-int Shape::getSizeDeformedY() {
-	return sizeY + deformY;
+int Shape::getDeformedSizeY() {
+	if(deformY > 0)
+		return sizeY + deformY;
+	else
+		return sizeY;
+}
+
+void Shape::addDeformX(int x) {
+	deformX += x;
+}
+
+void Shape::addDeformY(int y) {
+	deformY += y;
+}
+
+int Shape::getNegativeDeformX() {
+	if(deformX < 0)
+		return deformX;
+	else
+		return 0;
+}
+
+int Shape::getNegativeDeformY() {
+	if(deformY < 0)
+		return deformY;
+	else
+		return 0;
 }

@@ -12,9 +12,9 @@
 
 class Map {
 public:
-	Map(int sizeX, int sizeY);
-	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY);
-	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY, int viewX, int viewY);
+	Map(int sizeX, int sizeY, int unit);
+	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY, int unit);
+	Map(int sizeX, int sizeY, int sizeViewX, int sizeViewY, int viewX, int viewY, int unit);
 	virtual ~Map();
 
 	void moveView(int x, int y);
@@ -31,10 +31,20 @@ public:
 	void setViewX(int viewX);
 	int getViewY() const;
 	void setViewY(int viewY);
+	int getUnit() const;
+	void setUnit(int unidade);
+
+	int getSizePxX();
+	int getSizePxY();
+	int getViewPxX();
+	int getViewPxY();
 
 	bool isInView(Drawable* d);
 
 protected:
+
+	int unit;
+
 	int sizeX, sizeY;
 	int sizeViewX, sizeViewY;
 	int viewX, viewY;

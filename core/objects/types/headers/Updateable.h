@@ -17,7 +17,7 @@ public:
 	Updateable(Ambient* ambient);
 	Updateable(Ambient* ambient, Position* p);
 
-	void update();
+	virtual void update() = 0;
 
 	Ambient* getAmbient();
 	void setAmbient(Ambient* ambient);

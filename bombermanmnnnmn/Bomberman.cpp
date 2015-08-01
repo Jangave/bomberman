@@ -15,15 +15,10 @@
 #include "../core/headers/Position.h"
 #include "../core/headers/Shape.h"
 #include "../core/headers/Window.h"
-#include "../core/objects/headers/Object.h"
+#include "../core/objects/headers/Entity.h"
+#include "headers/Character.h"
 
 Bomberman::Bomberman() {
-	window = new Window(200, 100);
-
-	window->setup();
-
-	Map* map = new Map(100,100);
-	ambient = new Ambient(map);
 }
 
 Bomberman::~Bomberman() {
@@ -32,12 +27,39 @@ Bomberman::~Bomberman() {
 }
 
 int Bomberman::execute() {
+	float unit = 32;
+	int mx = 14, my = 12;
 
-	char c = 0;
+	Map* map = new Map((mx+1),(my+1), unit);
+	map->setUnit(unit);
 
-	Object* obj = new Object(new Position(50, 50), new Image(20,20), new Shape(20, 20));
+	window = new Window(map);
+	window->setup();
 
-	ambient->addObject(obj);
+	ambient = new Ambient(map, window);
+	int cd = unit - 2;
+	Character* cha = new Character(new Position(unit*5, unit*4), new Image(cd, cd), new Shape(cd, cd), ambient);
+
+	for (int i = 1; i < mx; ++i) {
+		ambient->addObject(new Object(new Position(unit*i, 0), new Image(unit, unit), new Shape(unit, unit)));
+	}
+	for (int i = 1; i < my; ++i) {
+		ambient->addObject(new Object(new Position(0, unit*i), new Image(unit, unit), new Shape(unit, unit)));
+	}
+	for (int i = 1; i < mx; ++i) {
+		ambient->addObject(new Object(new Position(unit*i, unit*my), new Image(unit, unit), new Shape(unit, unit)));
+	}
+	for (int i = 1; i < my; ++i) {
+		ambient->addObject(new Object(new Position(unit*mx, unit*i), new Image(unit, unit), new Shape(unit, unit)));
+	}
+
+	for (int i = 2; i < mx-1; i += 2) {
+		for (int j = 2; j < my-1; j += 2) {
+			ambient->addObject(new Object(new Position(unit*i, unit*j), new Image(unit, unit), new Shape(unit, unit)));
+		}
+	}
+
+	ambient->addEntity(cha);
 
 	do{
 		ambient->tick();

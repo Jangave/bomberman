@@ -6,11 +6,15 @@
 
 #include "headers/Ambient.h"
 
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+#include "headers/Position.h"
 
 void Ambient::tick(){
 
 	for (unsigned int i = 0; i < entitys.size(); ++i) {
-		for (unsigned int j = i; j < entitys.size(); ++j) {
+		for (unsigned int j = i+1; j < entitys.size(); ++j) {
 			if(entitys[i]->isColliding(entitys[j])){
 				entitys[i]->onCollide(entitys[j]);
 				entitys[j]->onCollide(entitys[i]);
@@ -23,14 +27,14 @@ void Ambient::tick(){
 			}
 		}
 		entitys[i]->update();
-		entitys[i]->draw();
+		draw(entitys[i]);
 	}
 	for (unsigned int i = 0; i < objects.size(); ++i){
-			objects[i]->draw();
+		draw(objects[i]);
 	}
 	for (unsigned int i = 0; i < particles.size(); ++i) {
 		particles[i]->update();
-		particles[i]->draw();
+		draw(particles[i]);
 	}
 
 }
@@ -48,8 +52,9 @@ void Ambient::addParticle(Particle* par) {
 }
 
 void Ambient::draw(Drawable* d){
-	if(map->isInView(d))
+	if(map->isInView(d)){
 		d->draw();
+	}
 }
 
 Ambient::Ambient() {
@@ -57,13 +62,15 @@ Ambient::Ambient() {
 	entitys = std::vector<Entity*>();
 	particles = std::vector<Particle*>();
 	map = 0;
+	window = 0;
 }
 
-Ambient::Ambient(Map* m) {
+Ambient::Ambient(Map* m, Window* w) {
 	objects = std::vector<Object*>();
 	entitys = std::vector<Entity*>();
 	particles = std::vector<Particle*>();
 	map = m;
+	window = w;
 }
 
 Ambient::~Ambient() {
@@ -80,6 +87,50 @@ Ambient::~Ambient() {
 	delete map;
 }
 
+const std::vector<Entity*>& Ambient::getEntitys() const {
+	return entitys;
+}
+
+void Ambient::setEntitys(const std::vector<Entity*>& entitys) {
+	this->entitys = entitys;
+}
+
+Map* Ambient::getMap() {
+	return map;
+}
+
+void Ambient::setMap(Map* map) {
+	this->map = map;
+}
+
+const std::vector<Object*>& Ambient::getObjects() const {
+	return objects;
+}
+
+void Ambient::setObjects(const std::vector<Object*>& objects) {
+	this->objects = objects;
+}
+
+const std::vector<Particle*>& Ambient::getParticles() const {
+	return particles;
+}
+
+void Ambient::setParticles(const std::vector<Particle*>& particles) {
+	this->particles = particles;
+}
+
+Window* Ambient::getWindow() {
+	return window;
+}
+
+void Ambient::setWindow(Window* window) {
+	this->window = window;
+}
+
+int Ambient::getKey(int key) {
+	return glfwGetKey(window->getNativeWindow(), key);
+}
+
 /*void Ambient::addObject(Object* o) {
 	objects.push_back(o);
 }
@@ -89,12 +140,12 @@ void Ambient::draw() {
 	int dims[4];
 	glGetIntegerv(GL_VIEWPORT, dims);
 
-	float w = (dims[2]/map->getSizeViewX());
-	float h = (dims[3]/map->getSizeViewY());
+	int w = (dims[2]/map->getSizeViewX());
+	int h = (dims[3]/map->getSizeViewY());
 
 	for(unsigned int i = 0; i < objects.size(); ++i){
-		float x = objects[i]->getPosition()->getX();
-		float y = objects[i]->getPosition()->getY();
+		int x = objects[i]->getPosition()->getX();
+		int y = objects[i]->getPosition()->getY();
 
 		glColor3f(objects[i]->getImage()->getColor(0),
 				objects[i]->getImage()->getColor(1),
