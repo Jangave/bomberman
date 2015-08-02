@@ -37,7 +37,7 @@ int Bomberman::execute() {
 	window->setup();
 
 	ambient = new Ambient(map, window);
-	int cd = unit - 2;
+	int cd = unit;// - 2;
 	Character* cha = new Character(new Position(unit*5, unit*4), new Image(cd, cd), new Shape(cd, cd), ambient);
 
 	for (int i = 1; i < mx; ++i) {
@@ -52,7 +52,6 @@ int Bomberman::execute() {
 	for (int i = 1; i < my; ++i) {
 		ambient->addObject(new Object(new Position(unit*mx, unit*i), new Image(unit, unit), new Shape(unit, unit)));
 	}
-
 	for (int i = 2; i < mx-1; i += 2) {
 		for (int j = 2; j < my-1; j += 2) {
 			ambient->addObject(new Object(new Position(unit*i, unit*j), new Image(unit, unit), new Shape(unit, unit)));

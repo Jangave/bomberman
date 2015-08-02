@@ -9,10 +9,12 @@
 
 Node::Node(){
 	position = 0;
+	type = 1;
 }
 
 Node::Node(Position* p) {
 	position = p;
+	type = 1;
 }
 
 Node::~Node(){

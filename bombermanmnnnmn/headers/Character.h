@@ -10,6 +10,8 @@
 
 #include "../../core/objects/headers/Entity.h"
 
+class Bomb;
+
 class Character : public Entity {
 public:
 	Character(Position* p, Image* image, Shape* shape, Ambient* ambient);
@@ -17,8 +19,22 @@ public:
 
 	void update();
 	void onCollide(Tangible* other);
+	int getPlantedBombs() const;
+	void setPlantedBombs(int plantedBombs);
+
+protected:
 
 	int speed;
+	int nbombs;
+	int fireSize;
+
+	Bomb* bombBelow;
+
+	//std::vector<Bomb*> bombs;
+	int plantedBombs;
+
+	void plantBomb();
+
 };
 
 #endif /* BOMBERMANMNNNMN_HEADERS_CHARACTER_H_ */

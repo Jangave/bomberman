@@ -23,10 +23,12 @@ void Drawable::setImage(Image*& image) {
 
 Drawable::Drawable(Image* image) : Node(){
 	this->image = image;
+	type *= DRAWABLE;
 }
 
 Drawable::Drawable(Image* image, Position* p) : Node(p){
 	this->image = image;
+	type *= DRAWABLE;
 }
 
 void Drawable::draw() {

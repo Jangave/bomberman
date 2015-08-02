@@ -12,7 +12,7 @@
 #include "../types/headers/Tangible.h"
 #include "../types/headers/Updateable.h"
 
-class Entity: public Drawable, public Tangible, public Updateable {
+class Entity : public Drawable, public Tangible, public Updateable {
 public:
 	Entity(Position* p, Image* image, Shape* shape, Ambient* ambient);
 	virtual ~Entity();

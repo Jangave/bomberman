@@ -84,3 +84,10 @@ int Shape::getNegativeDeformY() {
 	else
 		return 0;
 }
+
+Shape::Shape() {
+	sizeX = 0;
+	sizeY = 0;
+	deformX = 0;
+	deformY = 0;
+}

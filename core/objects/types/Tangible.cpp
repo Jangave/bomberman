@@ -13,10 +13,12 @@
 
 Tangible::Tangible(Shape* shape) : Node(){
 	this->shape = shape;
+	type *= TANGIBLE;
 }
 
 Tangible::Tangible(Shape* shape, Position* position) : Node(position){
 	this->shape = shape;
+	type *= TANGIBLE;
 }
 
 Shape*& Tangible::getShape() {

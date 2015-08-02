@@ -9,6 +9,7 @@
 #define CORE_HEADERS_NODE_H_
 
 #include "Position.h"
+#include "../Types.h"
 
 class Node {
 public:
@@ -19,8 +20,11 @@ public:
 	Position*& getPosition();
 	void setPosition(Position*& position);
 
+	int type;
 protected:
 	Position* position;
+
+
 };
 
 #endif /* CORE_HEADERS_NODE_H_ */

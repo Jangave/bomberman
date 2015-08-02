@@ -10,6 +10,7 @@
 
 class Shape {
 public:
+	Shape();
 	Shape(int sizeX, int sizeY);
 	virtual ~Shape();
 

@@ -26,8 +26,8 @@ void Ambient::tick(){
 				objects[j]->onCollide(entitys[i]);
 			}
 		}
-		entitys[i]->update();
 		draw(entitys[i]);
+		entitys[i]->update();
 	}
 	for (unsigned int i = 0; i < objects.size(); ++i){
 		draw(objects[i]);
@@ -39,6 +39,8 @@ void Ambient::tick(){
 
 }
 
+//vector<Tangible*> collisions
+
 void Ambient::addObject(Object* obj) {
 	objects.push_back(obj);
 }
@@ -49,6 +51,36 @@ void Ambient::addEntity(Entity* ent) {
 
 void Ambient::addParticle(Particle* par) {
 	particles.push_back(par);
+}
+
+void Ambient::removeObject(Object* obj) {
+	for ( std::vector<Object*>::iterator it = objects.begin(); it != objects.end(); ++it){
+	   if( (*it) == obj ){
+		  delete * it;
+		  objects.erase(it);
+		  break;
+	   }
+	}
+}
+
+void Ambient::removeEntity(Entity* ent) {
+	for ( std::vector<Entity*>::iterator it = entitys.begin(); it != entitys.end(); ++it){
+	   if( (*it) == ent ){
+		  delete * it;
+		  entitys.erase(it);
+		  break;
+	   }
+	}
+}
+
+void Ambient::removeParticle(Particle* par) {
+	for ( std::vector<Particle*>::iterator it = particles.begin(); it != particles.end(); ++it){
+	   if( (*it) == par ){
+		  delete * it;
+		  particles.erase(it);
+		  break;
+	   }
+	}
 }
 
 void Ambient::draw(Drawable* d){
@@ -129,6 +161,21 @@ void Ambient::setWindow(Window* window) {
 
 int Ambient::getKey(int key) {
 	return glfwGetKey(window->getNativeWindow(), key);
+}
+
+std::vector<Tangible*> Ambient::collisions(Tangible* t) {
+	std::vector<Tangible*> ret = std::vector<Tangible*>();
+	for (unsigned int j = 0; j < entitys.size(); ++j) {
+		if(entitys[j] != t && t->isColliding(entitys[j])){
+			ret.push_back(entitys[j]);
+		}
+	}
+	for (unsigned int j = 0; j < objects.size(); ++j) {
+		if(t->isColliding(objects[j])){
+			ret.push_back(objects[j]);
+		}
+	}
+	return ret;
 }
 
 /*void Ambient::addObject(Object* o) {

@@ -8,7 +8,7 @@
 #include "headers/Drawer.h"
 
 Drawer::Drawer() {
-	// TODO Auto-generated constructor stub
+
 
 }
 

@@ -4,6 +4,7 @@ core/Ambient.d: ../core/Ambient.cpp ../core/headers/Ambient.h \
  ../core/headers/../objects/headers/../types/headers/../../../headers/Image.h \
  ../core/headers/../objects/headers/../types/headers/../../../headers/Position.h \
  ../core/headers/../objects/headers/../types/headers/../../../headers/Node.h \
+ ../core/headers/../objects/headers/../types/headers/../../../headers/../Types.h \
  ../core/headers/../objects/headers/../types/headers/Tangible.h \
  ../core/headers/../objects/headers/../types/headers/../../../headers/Shape.h \
  ../core/headers/../objects/headers/../types/headers/Updateable.h \
@@ -24,6 +25,8 @@ core/Ambient.d: ../core/Ambient.cpp ../core/headers/Ambient.h \
 ../core/headers/../objects/headers/../types/headers/../../../headers/Position.h:
 
 ../core/headers/../objects/headers/../types/headers/../../../headers/Node.h:
+
+../core/headers/../objects/headers/../types/headers/../../../headers/../Types.h:
 
 ../core/headers/../objects/headers/../types/headers/Tangible.h:
 

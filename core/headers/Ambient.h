@@ -32,10 +32,15 @@ public:
 	void addObject(Object* obj);
 	void addEntity(Entity* ent);
 	void addParticle(Particle* par);
+	void removeObject(Object* obj);
+	void removeEntity(Entity* ent);
+	void removeParticle(Particle* par);
 
 	void tick();
 
 	void draw(Drawable* d);
+	std::vector<Tangible*> collisions(Tangible* t);
+
 	const std::vector<Entity*>& getEntitys() const;
 	void setEntitys(const std::vector<Entity*>& entitys);
 	Map* getMap();
@@ -56,6 +61,8 @@ protected:
 	Map* map;
 
 	Window* window;
+
+	//std::vector<Node*> toRemove;
 };
 
 #endif /* AMBIENT_H_ */
