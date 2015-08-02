@@ -16,7 +16,7 @@ public:
 	virtual ~Fire();
 
 	void update();
-	void onCollide();
+	void onCollide(Tangible* t);
 
 protected:
 	double initTime;

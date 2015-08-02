@@ -12,6 +12,8 @@
 #define WALL 13
 #define FIRE 17
 
+#define DESTROYABLE 19
+
 #endif
 
 

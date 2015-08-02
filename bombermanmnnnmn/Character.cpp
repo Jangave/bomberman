@@ -22,7 +22,7 @@ Character::Character(Position* p, Image* image, Shape* shape, Ambient* ambient) 
 	image->setColor(0.5,0.7,1);
 
 	speed = ((float)ambient->getMap()->getUnit())/60.0*4;
-	fireSize = 2;
+	fireSize = 3;
 	nbombs = 4;
 	bombBelow = 0;
 	plantedBombs = 0;
@@ -129,7 +129,7 @@ void Character::setPlantedBombs(int plantedBombs) {
 void Character::plantBomb() {
 	if(bombBelow == 0 && plantedBombs < nbombs){
 		plantedBombs++;
-		std::cout << "plantedBombs: " << plantedBombs << std::endl;
+		//std::cout << "plantedBombs: " << plantedBombs << std::endl;
 		bombBelow = new Bomb(new Position(position->getX() + shape->getSizeX()/2, position->getY() + shape->getSizeY()/2), fireSize, ambient, this);
 		ambient->addEntity(bombBelow);
 	}

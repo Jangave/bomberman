@@ -14,19 +14,22 @@
 #include "../core/headers/Map.h"
 #include "../core/headers/Position.h"
 #include "../core/headers/Shape.h"
+#include "../core/objects/headers/Object.h"
+#include "../core/Types.h"
+#include "headers/Bomb.h"
 #include "Types.h"
 
 Fire::Fire(Position* p, Ambient* ambient) : Entity(p, new Image(), new Shape(), ambient) {
 	int u = ambient->getMap()->getUnit();
-	position->setX(position->getX() / u * u + u/4);
-	position->setY(position->getY() / u * u + u/4);
+	position->setX(position->getX() / u * u);// + u/4);
+	position->setY(position->getY() / u * u);// + u/4);
 
-	image->setHeight(u/2);
-	image->setWidth(u/2);
+	image->setHeight(u);///2);
+	image->setWidth(u);///2);
 	image->setColor(1, 1, 0);
 
-	shape->setSizeX(u/2);
-	shape->setSizeY(u/2);
+	shape->setSizeX(u);///2);
+	shape->setSizeY(u);///2);
 
 	initTime = glfwGetTime();
 
@@ -42,5 +45,16 @@ void Fire::update() {
 	}
 }
 
-void Fire::onCollide() {
+void Fire::onCollide(Tangible* t) {
+	if(t->type % FIRE)
+	{
+		if(t->type % OBJECT == 0){
+			ambient->removeObject((Object*)t);
+			ambient->removeEntity(this);
+		}
+		if(t->type%BOMB == 0){
+			((Bomb*)t)->explode();
+		}
+	}
+
 }

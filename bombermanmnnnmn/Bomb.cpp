@@ -49,47 +49,45 @@ Bomb::~Bomb() {
 
 void Bomb::update() {
 	if(glfwGetTime() - initTime > 3){
-		for (int i = 1; i <= power; ++i) {
-			Fire* f = new Fire(new Position(position->getX()+ambient->getMap()->getUnit()*i, position->getY()), ambient);
-			if(ambient->collisions(f).size() == 0)
-				ambient->addEntity(f);
-			else{
-				delete f;
-				break;
-			}
-		}
-		for (int i = 1; i <= power; ++i) {
-			Fire* f = new Fire(new Position(position->getX()-ambient->getMap()->getUnit()*i, position->getY()), ambient);
-			if(ambient->collisions(f).size() == 0)
-				ambient->addEntity(f);
-			else{
-				delete f;
-				break;
-			}
-		}
-		for (int i = 1; i <= power; ++i) {
-			Fire* f = new Fire(new Position(position->getX(), position->getY()+ambient->getMap()->getUnit()*i), ambient);
-			if(ambient->collisions(f).size() == 0)
-				ambient->addEntity(f);
-			else{
-				delete f;
-				break;
-			}
-		}
-		for (int i = 1; i <= power; ++i) {
-			Fire* f = new Fire(new Position(position->getX(), position->getY()-ambient->getMap()->getUnit()*i), ambient);
-			if(ambient->collisions(f).size() == 0)
-				ambient->addEntity(f);
-			else{
-				delete f;
-				break;
-			}
-		}
-
-		owner->setPlantedBombs(owner->getPlantedBombs()-1);
-		ambient->removeEntity(this);
+		explode();
 	}
 	//std::cout << (glfwGetTime() - initTime) << std::endl;
+}
+
+void Bomb::explode(){
+	disperseFire( 1, 0);
+	disperseFire(-1, 0);
+	disperseFire( 0, 1);
+	disperseFire( 0,-1);
+	owner->setPlantedBombs(owner->getPlantedBombs()-1);
+	ambient->removeEntity(this);
+	//ambient->addEntity(new Fire(new Position(position->getX(), position->getY()), ambient));
+}
+
+void Bomb::disperseFire(int x, int y){
+	for (int i = 1; i <= power; ++i) {
+		Fire* f = new Fire(new Position(position->getX()+ambient->getMap()->getUnit()*i*x, position->getY()+ambient->getMap()->getUnit()*i*y), ambient);
+		std::vector<Tangible*> col = ambient->collisions(f);
+		if(col.size() == 0)
+			ambient->addEntity(f);
+		else{
+			bool b = false;
+			for (unsigned int i = 0; i < col.size(); ++i) {
+				if(col[i]->type % WALL == 0){
+					b = true;
+					if(col[i]->type % DESTROYABLE == 0)
+						ambient->addEntity(f);
+					else
+						delete f;
+					break;
+				}
+			}
+			if(b)
+				break;
+			else
+				ambient->addEntity(f);
+		}
+	}
 }
 
 void Bomb::onCollide(Tangible* other) {

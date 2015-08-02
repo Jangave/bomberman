@@ -20,12 +20,16 @@ public:
 	void update();
 	void onCollide(Tangible* other);
 
+	void explode();
+
 protected:
 	Character* owner;
 
 	double initTime;
 
 	int power;
+
+	void disperseFire(int x, int y);
 };
 
 #endif /* BOMBERMANMNNNMN_HEADERS_BOMB_H_ */

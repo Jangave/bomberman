@@ -8,11 +8,14 @@
 
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <iterator>
 
-#include "headers/Position.h"
 
 void Ambient::tick(){
 
+	for (unsigned int i = 0; i < objects.size(); ++i){
+		draw(objects[i]);
+	}
 	for (unsigned int i = 0; i < entitys.size(); ++i) {
 		for (unsigned int j = i+1; j < entitys.size(); ++j) {
 			if(entitys[i]->isColliding(entitys[j])){
@@ -29,14 +32,12 @@ void Ambient::tick(){
 		draw(entitys[i]);
 		entitys[i]->update();
 	}
-	for (unsigned int i = 0; i < objects.size(); ++i){
-		draw(objects[i]);
-	}
 	for (unsigned int i = 0; i < particles.size(); ++i) {
 		particles[i]->update();
 		draw(particles[i]);
 	}
 
+	removePendents();
 }
 
 //vector<Tangible*> collisions
@@ -54,33 +55,56 @@ void Ambient::addParticle(Particle* par) {
 }
 
 void Ambient::removeObject(Object* obj) {
-	for ( std::vector<Object*>::iterator it = objects.begin(); it != objects.end(); ++it){
-	   if( (*it) == obj ){
-		  delete * it;
-		  objects.erase(it);
-		  break;
-	   }
-	}
+	objectsToRemove.push_back(obj);
 }
 
 void Ambient::removeEntity(Entity* ent) {
-	for ( std::vector<Entity*>::iterator it = entitys.begin(); it != entitys.end(); ++it){
-	   if( (*it) == ent ){
-		  delete * it;
-		  entitys.erase(it);
-		  break;
-	   }
-	}
+	entitysToRemove.push_back(ent);
 }
 
 void Ambient::removeParticle(Particle* par) {
-	for ( std::vector<Particle*>::iterator it = particles.begin(); it != particles.end(); ++it){
-	   if( (*it) == par ){
-		  delete * it;
-		  particles.erase(it);
-		  break;
-	   }
+	particlesToRemove.push_back(par);
+}
+
+void Ambient::removePendents(){
+	int c = 0;
+	for (std::vector<Object*>::iterator itr = objectsToRemove.begin(); itr != objectsToRemove.end(); ++itr) {
+		for ( std::vector<Object*>::iterator it = objects.begin(); it != objects.end(); ++it){
+		   std::cout << "entitys\t\t" << *it << "\t" << *itr << std::endl;
+		   if( *it == *itr ){
+			  delete * it;
+			  objects.erase(it);
+			  break;
+		   }
+		c++;
+		}
 	}
+	for (std::vector<Entity*>::iterator itr = entitysToRemove.begin(); itr != entitysToRemove.end(); ++itr) {
+		for ( std::vector<Entity*>::iterator it = entitys.begin(); it != entitys.end(); ++it){
+		   if( *it == *itr ){
+			  delete * it;
+			  entitys.erase(it);
+			  break;
+		   }
+		c++;
+		}
+	}
+	for (std::vector<Particle*>::iterator itr = particlesToRemove.begin(); itr != particlesToRemove.end(); ++itr) {
+		for ( std::vector<Particle*>::iterator it = particles.begin(); it != particles.end(); ++it){
+		   if( *it == *itr ){
+			  delete * it;
+			  particles.erase(it);
+			  break;
+		   }
+		c++;
+		}
+	}
+	//std::cout << "entitys\t\t" << entitysToRemove.size() << "\t" << entitys.size() << std::endl;
+	//std::cout << "objects\t\t" << objectsToRemove.size() << "\t" << objects.size() << std::endl;
+	//std::cout << "particles\t\t" << particlesToRemove.size() << "\t" << particles.size() << std::endl;
+	objectsToRemove.erase(objectsToRemove.begin(), objectsToRemove.end());
+	entitysToRemove.erase(entitysToRemove.begin(), entitysToRemove.end());
+	particlesToRemove.erase(particlesToRemove.begin(), particlesToRemove.end());
 }
 
 void Ambient::draw(Drawable* d){
@@ -93,6 +117,11 @@ Ambient::Ambient() {
 	objects = std::vector<Object*>();
 	entitys = std::vector<Entity*>();
 	particles = std::vector<Particle*>();
+
+	objectsToRemove = std::vector<Object*>();
+	entitysToRemove = std::vector<Entity*>();
+	particlesToRemove = std::vector<Particle*>();
+
 	map = 0;
 	window = 0;
 }
@@ -101,6 +130,11 @@ Ambient::Ambient(Map* m, Window* w) {
 	objects = std::vector<Object*>();
 	entitys = std::vector<Entity*>();
 	particles = std::vector<Particle*>();
+
+	objectsToRemove = std::vector<Object*>();
+	entitysToRemove = std::vector<Entity*>();
+	particlesToRemove = std::vector<Particle*>();
+
 	map = m;
 	window = w;
 }

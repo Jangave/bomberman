@@ -62,7 +62,11 @@ protected:
 
 	Window* window;
 
-	//std::vector<Node*> toRemove;
+	std::vector<Object*> objectsToRemove;
+	std::vector<Entity*> entitysToRemove;
+	std::vector<Particle*> particlesToRemove;
+
+	void removePendents();
 };
 
 #endif /* AMBIENT_H_ */

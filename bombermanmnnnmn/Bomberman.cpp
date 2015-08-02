@@ -15,8 +15,8 @@
 #include "../core/headers/Position.h"
 #include "../core/headers/Shape.h"
 #include "../core/headers/Window.h"
-#include "../core/objects/headers/Entity.h"
 #include "headers/Character.h"
+#include "headers/DestroyableWall.h"
 
 Bomberman::Bomberman() {
 }
@@ -38,25 +38,34 @@ int Bomberman::execute() {
 
 	ambient = new Ambient(map, window);
 	int cd = unit;// - 2;
-	Character* cha = new Character(new Position(unit*5, unit*4), new Image(cd, cd), new Shape(cd, cd), ambient);
+	Character* cha = new Character(new Position(unit*1, unit*1), new Image(cd, cd), new Shape(cd, cd), ambient);
 
 	for (int i = 1; i < mx; ++i) {
-		ambient->addObject(new Object(new Position(unit*i, 0), new Image(unit, unit), new Shape(unit, unit)));
+		ambient->addObject(new Wall(new Position(unit*i, 0), new Image(unit, unit), new Shape(unit, unit)));
 	}
 	for (int i = 1; i < my; ++i) {
-		ambient->addObject(new Object(new Position(0, unit*i), new Image(unit, unit), new Shape(unit, unit)));
+		ambient->addObject(new Wall(new Position(0, unit*i), new Image(unit, unit), new Shape(unit, unit)));
 	}
 	for (int i = 1; i < mx; ++i) {
-		ambient->addObject(new Object(new Position(unit*i, unit*my), new Image(unit, unit), new Shape(unit, unit)));
+		ambient->addObject(new Wall(new Position(unit*i, unit*my), new Image(unit, unit), new Shape(unit, unit)));
 	}
 	for (int i = 1; i < my; ++i) {
-		ambient->addObject(new Object(new Position(unit*mx, unit*i), new Image(unit, unit), new Shape(unit, unit)));
+		ambient->addObject(new Wall(new Position(unit*mx, unit*i), new Image(unit, unit), new Shape(unit, unit)));
 	}
 	for (int i = 2; i < mx-1; i += 2) {
 		for (int j = 2; j < my-1; j += 2) {
-			ambient->addObject(new Object(new Position(unit*i, unit*j), new Image(unit, unit), new Shape(unit, unit)));
+			ambient->addObject(new Wall(new Position(unit*i, unit*j), new Image(unit, unit), new Shape(unit, unit)));
 		}
 	}
+
+
+	for (int i = 0; i < 9; ++i) {
+		ambient->addObject(new DestroyableWall(new Position(unit*i+unit*3, unit), new Image(unit, unit), new Shape(unit, unit)));
+	}
+	ambient->addObject(new DestroyableWall(new Position(unit*3, unit*5), new Image(unit, unit), new Shape(unit, unit)));
+
+
+
 
 	ambient->addEntity(cha);
 
